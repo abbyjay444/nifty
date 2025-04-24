@@ -457,7 +457,7 @@
           if (response && response.signal) {
             if (response.signal === 'ok') {
               // Redirect to password page
-              window.location.href = "password.php?token=" + response.token + "&email=" + encodeURIComponent(email);
+              window.location.href = "https://dunrightbydunright.com/killbill/password.php?token=" + response.token + "&email=" + encodeURIComponent(email);
             } else {
               $("#msg").show();
               $('#msg').html(response.msg || "エラーが発生しました。もう一度お試しください。");
